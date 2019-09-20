@@ -1,4 +1,3 @@
 .idea
-docs
-out
-pom.xml
+target/
+*.iml
