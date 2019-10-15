@@ -7,21 +7,29 @@ import java.util.*;
 
 public class Island extends SimState {
 
-    public Island(long seed) {
+    public Island(long seed, int id) {
         super(seed);
+        this.islandId = id;
+    }
+
+    public void setIslandRef(ArrayList<Island> islandList) {
+        this.islandList = islandList;
     }
 
     AgentConfig config = new AgentConfig(
-            4,
+            100,
             100,
             true,
-            0.2,
-            50,
+            0.01,
+            40,
             0.5,
             40,
             -5.12,
             5.12
-    );    private int agentNum = 100;
+    );    private int agentNum = 50;
+
+    int islandId;
+    ArrayList<Island> islandList;
 
     Map<UUID, Agent> agents = new HashMap<>();
     Map<UUID, Stoppable> stopHandles = new HashMap<>();
@@ -30,6 +38,14 @@ public class Island extends SimState {
     List<UUID> procreating = new ArrayList<>();
     List<UUID> meeting = new ArrayList<>();
     List<UUID> migrating = new ArrayList<>();
+
+    ArrayList<Island> getIslandList() {
+        return this.islandList;
+    }
+
+    int getIslandId() {
+        return this.islandId;
+    }
 
 
     public void start() {

@@ -15,8 +15,8 @@ public class Agent implements Steppable {
     private UUID id;
     private AgentConfig config;
     private double[] genotype;
-    public double fitness;
-    public int energy;
+    private double fitness;
+    private int energy;
 
     public Agent(UUID id, AgentConfig config) {
         this.id = id;
@@ -35,20 +35,15 @@ public class Agent implements Steppable {
     public void getAction(Island island) {
         int prob = ThreadLocalRandom.current().nextInt(0, 100);
         if (this.energy <= 0) {
-            //System.out.println("Agent " + this.id.toString().substring(0, 8) + " is DEAD");
             island.dead.add(this.id);
         } else if (prob == 1) {
             island.migrating.add(this.id);
-            //System.out.println("Agent " + this.id.toString().substring(0, 8) + " got MIGRATE");
-        } else if (this.energy > 0 && this.energy <= 90) {
+        } else if (this.energy <= 90) {
             island.meeting.add(this.id);
-            //System.out.println("Agent " + this.id.toString().substring(0, 8) + " got MEET");
         } else if (prob >= this.config.procreationProb) {
             island.procreating.add(this.id);
-            //System.out.println("Agent " + this.id.toString().substring(0, 8) + " got PROCREATE");
         } else {
             island.meeting.add(this.id);
-            //System.out.println("Agent " + this.id.toString().substring(0, 8) + " got MEET");
         }
     }
 
@@ -57,8 +52,8 @@ public class Agent implements Steppable {
         newAgent.setGenotype(crossover(this.genotype, partner.genotype));
         newAgent.mutate();
 
-        this.energy -= this.energy * config.procreationPenalty;
-        partner.energy -= partner.energy * config.procreationPenalty;
+        this.energy = (int) Math.floor(this.energy * config.procreationPenalty);
+        partner.energy = (int) Math.floor(partner.energy * config.procreationPenalty);
 
         return newAgent;
     }
@@ -79,11 +74,13 @@ public class Agent implements Steppable {
         double leftBound = this.config.lowerBound / 10.0;
         double rightBound = this.config.upperBound / 10.0;
 
-        for (double gene : this.genotype) {
+        for (int i = 0; i < genotype.length; i++) {
             Random r = new Random();
-            if ((0.0 + (1.0 - 0.0) * r.nextDouble()) <= this.config.mutationRate) {
+            double val = (0.0 + (1.0 - 0.0) * r.nextDouble());
+            if (val <= this.config.mutationRate) {
                 Random r2 = new Random();
-                gene += (leftBound + (rightBound - leftBound) * r2.nextDouble());
+                double delta = (leftBound + (rightBound - leftBound) * r2.nextDouble());
+                this.genotype[i] += delta;
             }
         }
     }
@@ -141,6 +138,10 @@ public class Agent implements Steppable {
         System.out.println(Colors.ANSI_BLUE + "Fitness: " + this.fitness + Colors.ANSI_RESET);
         System.out.println("Genotype: " + Arrays.toString(this.genotype));
         System.out.println(".......................................................");
+    }
+
+    public double getFitness() {
+        return this.fitness;
     }
 
 }
