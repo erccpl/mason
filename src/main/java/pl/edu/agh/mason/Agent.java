@@ -135,7 +135,7 @@ public class Agent implements Steppable {
         System.out.println("BEST AGENT:");
         System.out.println("Agent id: " + this.id.toString().substring(0, 8));
         System.out.println("Energy: " + this.energy);
-        System.out.println(Colors.ANSI_BLUE + "Fitness: " + this.fitness + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_YELLOW + "Fitness: " + this.fitness + Colors.ANSI_RESET);
         System.out.println("Genotype: " + Arrays.toString(this.genotype));
         System.out.println(".......................................................");
     }

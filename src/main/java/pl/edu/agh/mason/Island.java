@@ -7,26 +7,19 @@ import java.util.*;
 
 public class Island extends SimState {
 
-    public Island(long seed, int id) {
+    public Island(long seed, int i, AgentConfig config) {
         super(seed);
-        this.islandId = id;
+        this.islandId = i;
+        this.config = config;
     }
 
     public void setIslandRef(ArrayList<Island> islandList) {
         this.islandList = islandList;
     }
 
-    AgentConfig config = new AgentConfig(
-            100,
-            100,
-            true,
-            0.01,
-            40,
-            0.5,
-            40,
-            -5.12,
-            5.12
-    );    private int agentNum = 50;
+
+    private int agentNum = 50;
+    private AgentConfig config;
 
     int islandId;
     ArrayList<Island> islandList;

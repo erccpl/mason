@@ -6,18 +6,30 @@ import java.util.ArrayList;
 
 public class Simulation {
     public static void main(String[] args) {
-        if (args.length != 2){
-            System.out.println("Program parameters: <islands> <turns>");
+        if (args.length != 3){
+            System.out.println("Program parameters: <genotype_dim> <islands> <turns>");
         }
+        AgentConfig config = new AgentConfig(
+                Integer.parseInt(args[0]),
+                100,
+                true,
+                0.01,
+                40,
+                0.5,
+                40,
+                -5.12,
+                5.12
+        );
+
         long time = System.currentTimeMillis();
 
-        int islandNum = Integer.parseInt(args[0]);
-        int turns = Integer.parseInt(args[1]);
+        int islandNum = Integer.parseInt(args[1]);
+        int turns = Integer.parseInt(args[2]);
         ArrayList<Island> islands = new ArrayList<>();
 
         // Create islands
         for (int i = 0; i < islandNum; i++) {
-            islands.add(new Island(time, i));
+            islands.add(new Island(time, i, config));
         }
 
         //Provide islands with reference to all other islands
