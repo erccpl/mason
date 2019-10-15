@@ -54,7 +54,7 @@ public class Island extends SimState {
         }
 
         ActionResolutionAgent resolutionAgent = new ActionResolutionAgent(0);
-        System.out.println("Created procreation agent");
+        System.out.println("Created resolution agent");
         schedule.addAfter(resolutionAgent);
     }
 
