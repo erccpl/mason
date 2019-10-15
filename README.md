@@ -1,10 +1,6 @@
 # Mason
 
-This is a evolutionary multi-agent simulation (EMAS) for computational purposes modelled in the MASON agent framework (https://cs.gmu.edu/~eclab/projects/mason/).
-
-So far, one implementation is provided:
-calculating the global optimum for an n-dimentional Rastrigin function (https://en.wikipedia.org/wiki/Rastrigin_function).
-The closer the agent fitness is to 0 (which is the global optimum in the case of any Rastrigin function), the better.
+This is a evolutionary multi-agent simulation (EMAS) for computational purposes modelled in the MASON agent framework (https://cs.gmu.edu/~eclab/projects/mason/). This is an implementation for a specific problem: calculating the global optimum for an n-dimentional Rastrigin function (https://en.wikipedia.org/wiki/Rastrigin_function), although any such function may be substituted into the program. The closer the agent fitness is to 0 (which is the global optimum in the case of any Rastrigin function), the better.
 
 ## Program arguments
 There are three arguments, provided in this order:
